@@ -1,9 +1,13 @@
 ---
-
+import { Button } from '@/components/ui/button'
+import ReactSheet from '@/components/react-sheet'
 ---
 
 <div>
   <main>
+    integrate Astro with Tailwind V3 and Shadcn/ui
     <div class='mt-2 border-b'>example div</div>
+    <Button variant={'outline'} client:idle>example button</Button>
+    <ReactSheet client:load />
   </main>
 </div>
