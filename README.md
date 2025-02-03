@@ -1,48 +1,74 @@
-# Astro Starter Kit: Basics
+# Astro + shadcn/ui Sample
 
-```sh
-npm create astro@latest -- --template basics
-```
+This repository provides a code sample demonstrating the integration of **Astro** with **shadcn/ui**.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+> **Note:** At the time of writing, `shadcn/ui` does not support Tailwind CSS v4. Therefore, this project uses Tailwind CSS v3. If you require Tailwind CSS v4 support, please refer to the official documentation for any necessary adjustments.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Overview
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+This project showcases how to integrate:
 
-## 🚀 Project Structure
+- **Astro**: A modern framework for building static and dynamic websites.
+- **shadcn/ui**: A powerful UI component library built with Tailwind CSS.
+- **Tailwind CSS v3**: A utility-first CSS framework.
 
-Inside of your Astro project, you'll see the following folders and files:
+## Detail guide
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+1. **Install dependencies**  
+   Run the following command to add the final v5 version of `@astrojs/tailwind` and the final v3 version of `tailwindcss`:
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+   ```bash
+   pnpm add @astrojs/tailwind@^5 tailwindcss@^3
+   ```
 
-## 🧞 Commands
+2. **Manual Installation**  
+   Follow the steps in the **Manual Install** section of the [Tailwind CSS Integration Guide for Astro](https://github.com/withastro/docs/blob/1e7f9af85ddaa3074cbc7f649370be965aed498b/src/content/docs/en/guides/integrations-guide/tailwind.mdx)
 
-All commands are run from the root of the project, from a terminal:
+   > _(Note: This is the older guide for `@astrojs/tailwind` before it was deprecated.)_
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+3. **Create global styles**  
+   Create a file at `styles/globals.css` with the following content:
 
-## 👀 Want to learn more?
+   ```css
+   @tailwind base;
+   @tailwind components;
+   @tailwind utilities;
+   ```
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+4. **Set up the layout**  
+   Create or update `src/layouts/Layout.astro` with the following content to import the global styles:
+
+   ```astro
+   ---
+   import '@/styles/globals.css';
+   ---
+   ```
+
+5. **Update Astro configuration**  
+   In your `astro.config.mjs`, update the configuration to set `applyBaseStyles` to `false`:
+
+   ```js
+   export default defineConfig({
+     integrations: [
+       tailwind({
+         applyBaseStyles: false,
+       }),
+     ],
+   })
+   ```
+
+6. **Configure TypeScript paths**  
+   Update your `tsconfig.json` file to include the following configuration:
+
+   ```json
+   {
+     "compilerOptions": {
+       // ...
+       "baseUrl": ".",
+       "paths": {
+         "@/*": ["./src/*"]
+       }
+       // ...
+     }
+   }
+   ```
