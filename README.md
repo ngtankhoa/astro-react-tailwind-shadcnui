@@ -4,6 +4,8 @@ This repository provides a code sample demonstrating the integration of **Astro*
 
 > **Note:** At the time of writing, `shadcn/ui` does not support Tailwind CSS v4. Therefore, this project uses Tailwind CSS v3. If you require Tailwind CSS v4 support, please refer to the official documentation for any necessary adjustments.
 
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/ngtankhoa/astro-react-tailwind-shadcnui?title=astro-react-tailwindv3-shadcnui)
+
 ## Overview
 
 This project showcases how to integrate:
